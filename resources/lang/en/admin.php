@@ -1,0 +1,120 @@
+<?php
+
+return [
+    'permission' => 'Rules: manage the rules, their versions and view acceptances',
+
+    'nav' => [
+        'title' => 'Rules',
+        'dashboard' => 'Overview',
+        'sections' => 'Sections (draft)',
+        'versions' => 'Versions',
+        'users' => 'Acceptances per player',
+        'settings' => 'Settings',
+    ],
+
+    'dashboard' => [
+        'title' => 'Rules',
+        'current' => 'Current version',
+        'required' => 'Version to accept',
+        'none' => 'None',
+        'accepted' => 'Players who accepted',
+        'accepted_help' => ':accepted out of :total accounts accepted version :version (or a newer one).',
+        'recent' => 'Latest acceptances',
+        'no_recent' => 'No acceptance yet.',
+        'draft_changes' => 'The draft contains unpublished changes.',
+        'draft_clean' => 'The draft is identical to the current version.',
+        'publish' => 'Publish a new version',
+        'edit_sections' => 'Edit sections',
+        'not_published' => 'No version published: write the sections then publish the first version.',
+        'mode' => 'Display',
+        'blocked' => 'Blocked actions',
+        'nothing_blocked' => 'None',
+    ],
+
+    'sections' => [
+        'title' => 'Rules sections (draft)',
+        'create' => 'Add a section',
+        'edit' => 'Edit section ":title"',
+        'empty' => 'No section.',
+        'saved' => 'Draft saved. Publish a new version to apply it.',
+        'order_updated' => 'The sections order has been saved. Publish a new version to apply it.',
+        'info' => 'Sections are the draft of the rules: players only see the changes once a new version is published.',
+        'fields' => [
+            'title' => 'Title',
+            'content' => 'Content',
+        ],
+    ],
+
+    'versions' => [
+        'title' => 'Rules versions',
+        'create' => 'Publish a new version',
+        'show' => 'Version :version',
+        'empty' => 'No published version.',
+        'current' => 'Current',
+        'published' => 'Version :version has been published.',
+        'no_sections' => 'Add at least one section before publishing.',
+        'acceptances' => 'Acceptances',
+        'no_acceptances' => 'No acceptance for this version.',
+        'changes' => 'Changes compared to the previous version',
+        'draft_changes' => 'Changes of the draft compared to the current version',
+        'no_draft_changes' => 'The draft is identical to the current version: you can still publish (e.g. to require a new acceptance).',
+        'author' => 'Published by',
+        'content' => 'Published content',
+        'fields' => [
+            'version' => 'Version number',
+            'summary' => 'Summary of the changes (visible to players)',
+            'requires_acceptance' => 'Require a new acceptance from all players',
+            'requires_acceptance_help' => 'Otherwise, the version is published as a minor fix: players who accepted a previous version are not asked again.',
+            'date' => 'Date',
+            'user' => 'Player',
+            'ip' => 'IP (hashed)',
+            'source' => 'Source',
+        ],
+        'sources' => [
+            'modal' => 'Popup',
+            'page' => 'Rules page',
+            'register' => 'Registration',
+            'import' => 'Import',
+        ],
+    ],
+
+    'users' => [
+        'title' => 'Acceptances per player',
+        'card' => 'Rules',
+        'search' => 'Name or email…',
+        'results' => 'Several accounts match:',
+        'no_results' => 'No account matches.',
+        'empty' => 'This player has not accepted any version of the rules.',
+        'up_to_date' => 'Up to date: accepted the required version (:version).',
+        'outdated' => 'Must accept version :version.',
+        'ip_help' => 'IP addresses are stored hashed (HMAC-SHA256 with the application key): two acceptances can be compared without keeping the clear IP.',
+    ],
+
+    'settings' => [
+        'title' => 'Rules settings',
+        'mode' => 'When a logged-in player has not accepted the required version',
+        'modes' => [
+            'modal' => 'Blocking popup: the player must accept to use the website',
+            'banner' => 'Non-blocking banner at the top of the pages',
+            'none' => 'Display nothing',
+        ],
+        'block' => 'Block some actions until the rules are accepted',
+        'block_help' => 'Only actions (form submissions) are blocked, browsing stays possible.',
+        'groups' => [
+            'forum' => 'Forum: create a discussion, reply, react',
+            'shop' => 'Shop: cart and purchases',
+            'comments' => 'News comments',
+            'support' => 'Support: open or reply to a ticket',
+            'vote' => 'Votes',
+        ],
+        'routes' => 'Other routes to block (route names, wildcards allowed)',
+        'routes_help' => 'Example: wiki.* or profile.update. One route per line.',
+        'register' => 'Require the acceptance of the rules on registration (checkbox)',
+        'register_help' => 'The checkbox is automatically added to the registration form and the acceptance is recorded with the account.',
+    ],
+
+    'logs' => [
+        'published' => 'Published version :version of the rules',
+        'settings' => 'Updated the rules settings',
+    ],
+];

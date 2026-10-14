@@ -1,0 +1,120 @@
+<?php
+
+return [
+    'permission' => 'Règlement : gérer le règlement, ses versions et consulter les acceptations',
+
+    'nav' => [
+        'title' => 'Règlement',
+        'dashboard' => 'Vue d\'ensemble',
+        'sections' => 'Sections (brouillon)',
+        'versions' => 'Versions',
+        'users' => 'Acceptations par joueur',
+        'settings' => 'Réglages',
+    ],
+
+    'dashboard' => [
+        'title' => 'Règlement',
+        'current' => 'Version en vigueur',
+        'required' => 'Version à accepter',
+        'none' => 'Aucune',
+        'accepted' => 'Joueurs ayant accepté',
+        'accepted_help' => ':accepted sur :total comptes ont accepté la version :version (ou une version plus récente).',
+        'recent' => 'Dernières acceptations',
+        'no_recent' => 'Aucune acceptation pour le moment.',
+        'draft_changes' => 'Le brouillon contient des modifications non publiées.',
+        'draft_clean' => 'Le brouillon est identique à la version en vigueur.',
+        'publish' => 'Publier une nouvelle version',
+        'edit_sections' => 'Modifier les sections',
+        'not_published' => 'Aucune version publiée : rédigez les sections puis publiez la première version.',
+        'mode' => 'Affichage',
+        'blocked' => 'Actions bloquées',
+        'nothing_blocked' => 'Aucune',
+    ],
+
+    'sections' => [
+        'title' => 'Sections du règlement (brouillon)',
+        'create' => 'Ajouter une section',
+        'edit' => 'Modifier la section « :title »',
+        'empty' => 'Aucune section.',
+        'saved' => 'Brouillon enregistré. Publiez une nouvelle version pour l\'appliquer.',
+        'order_updated' => 'L\'ordre des sections a été enregistré. Publiez une nouvelle version pour l\'appliquer.',
+        'info' => 'Les sections forment le brouillon du règlement : les joueurs ne voient les changements qu\'après la publication d\'une nouvelle version.',
+        'fields' => [
+            'title' => 'Titre',
+            'content' => 'Contenu',
+        ],
+    ],
+
+    'versions' => [
+        'title' => 'Versions du règlement',
+        'create' => 'Publier une nouvelle version',
+        'show' => 'Version :version',
+        'empty' => 'Aucune version publiée.',
+        'current' => 'En vigueur',
+        'published' => 'La version :version a été publiée.',
+        'no_sections' => 'Ajoutez au moins une section avant de publier.',
+        'acceptances' => 'Acceptations',
+        'no_acceptances' => 'Aucune acceptation pour cette version.',
+        'changes' => 'Changements par rapport à la version précédente',
+        'draft_changes' => 'Changements du brouillon par rapport à la version en vigueur',
+        'no_draft_changes' => 'Le brouillon est identique à la version en vigueur : vous pouvez tout de même publier (par exemple pour exiger une nouvelle acceptation).',
+        'author' => 'Publiée par',
+        'content' => 'Contenu publié',
+        'fields' => [
+            'version' => 'Numéro de version',
+            'summary' => 'Résumé des changements (visible par les joueurs)',
+            'requires_acceptance' => 'Exiger une nouvelle acceptation de tous les joueurs',
+            'requires_acceptance_help' => 'Sinon, la version est publiée comme une correction mineure : les joueurs ayant accepté une version précédente ne sont pas sollicités.',
+            'date' => 'Date',
+            'user' => 'Joueur',
+            'ip' => 'IP (hachée)',
+            'source' => 'Origine',
+        ],
+        'sources' => [
+            'modal' => 'Fenêtre',
+            'page' => 'Page règlement',
+            'register' => 'Inscription',
+            'import' => 'Import',
+        ],
+    ],
+
+    'users' => [
+        'title' => 'Acceptations par joueur',
+        'card' => 'Règlement',
+        'search' => 'Pseudo ou email…',
+        'results' => 'Plusieurs comptes correspondent :',
+        'no_results' => 'Aucun compte ne correspond.',
+        'empty' => 'Ce joueur n\'a accepté aucune version du règlement.',
+        'up_to_date' => 'À jour : a accepté la version exigée (:version).',
+        'outdated' => 'Doit accepter la version :version.',
+        'ip_help' => 'Les adresses IP sont stockées hachées (HMAC-SHA256 avec la clé de l\'application) : elles permettent de comparer deux acceptations sans conserver l\'IP en clair.',
+    ],
+
+    'settings' => [
+        'title' => 'Réglages du règlement',
+        'mode' => 'Quand un joueur connecté n\'a pas accepté la version exigée',
+        'modes' => [
+            'modal' => 'Fenêtre bloquante : le joueur doit accepter pour utiliser le site',
+            'banner' => 'Bandeau non bloquant en haut des pages',
+            'none' => 'Ne rien afficher',
+        ],
+        'block' => 'Bloquer certaines actions tant que le règlement n\'est pas accepté',
+        'block_help' => 'Seules les actions (envoi de formulaires) sont bloquées, la consultation reste possible.',
+        'groups' => [
+            'forum' => 'Forum : créer une discussion, répondre, réagir',
+            'shop' => 'Boutique : panier et achats',
+            'comments' => 'Commentaires des actualités',
+            'support' => 'Support : ouvrir ou répondre à un ticket',
+            'vote' => 'Votes',
+        ],
+        'routes' => 'Autres routes à bloquer (noms de routes, jokers acceptés)',
+        'routes_help' => 'Exemple : wiki.* ou profile.update. Une route par ligne.',
+        'register' => 'Exiger l\'acceptation du règlement à l\'inscription (case à cocher)',
+        'register_help' => 'La case est ajoutée automatiquement au formulaire d\'inscription et l\'acceptation est enregistrée avec le compte.',
+    ],
+
+    'logs' => [
+        'published' => 'Publication de la version :version du règlement',
+        'settings' => 'Mise à jour des réglages du règlement',
+    ],
+];

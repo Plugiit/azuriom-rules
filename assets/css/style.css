@@ -1,0 +1,319 @@
+/* Plugiit Rules — every selector is prefixed with "plugiit-rules-". */
+
+/* ---------- Public page ---------- */
+.plugiit-rules-page .plugiit-rules-toc {
+    position: sticky;
+    top: 1rem;
+}
+
+.plugiit-rules-page .plugiit-rules-section {
+    scroll-margin-top: 5rem;
+}
+
+.plugiit-rules-page .plugiit-rules-section + .plugiit-rules-section {
+    border-top: 1px solid var(--bs-border-color, #dee2e6);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.plugiit-rules-page .plugiit-rules-anchor:hover::after {
+    content: " #";
+    color: var(--bs-secondary-color, #6c757d);
+}
+
+.plugiit-rules-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ---------- Blocking modal ---------- */
+html.plugiit-rules-locked,
+html.plugiit-rules-locked body,
+html:has(#plugiit-rules-modal),
+html:has(#plugiit-rules-modal) body {
+    overflow: hidden !important;
+}
+
+.plugiit-rules-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(10, 12, 16, 0.72);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
+.plugiit-rules-dialog {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 720px;
+    max-height: calc(100vh - 2rem);
+    max-height: calc(100dvh - 2rem);
+    overflow: hidden;
+    color: var(--bs-body-color, #212529);
+    background: var(--bs-body-bg, #fff);
+    border-radius: 0.75rem;
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.35);
+    font-family: var(--bs-body-font-family, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.plugiit-rules-header {
+    display: flex;
+    gap: 0.85rem;
+    align-items: center;
+    padding: 1.1rem 1.5rem;
+    border-bottom: 1px solid var(--bs-border-color, #dee2e6);
+}
+
+.plugiit-rules-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    font-size: 1.35rem;
+    color: #fff;
+    background: var(--bs-primary, #0d6efd);
+    border-radius: 50%;
+}
+
+.plugiit-rules-title {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.plugiit-rules-meta {
+    color: var(--bs-secondary-color, #6c757d);
+    font-size: 0.875rem;
+}
+
+.plugiit-rules-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 1rem 1.5rem;
+    overscroll-behavior: contain;
+}
+
+.plugiit-rules-body:focus {
+    outline: none;
+}
+
+.plugiit-rules-intro {
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.plugiit-rules-changes {
+    margin-bottom: 1.25rem;
+    padding: 0.75rem 1rem;
+    background: var(--bs-tertiary-bg, #f8f9fa);
+    border-left: 4px solid var(--bs-warning, #ffc107);
+    border-radius: 0.375rem;
+}
+
+.plugiit-rules-changes p,
+.plugiit-rules-changes ul {
+    margin: 0.25rem 0 0;
+}
+
+.plugiit-rules-changes ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+.plugiit-rules-changes-title {
+    font-weight: 600;
+}
+
+.plugiit-rules-tag {
+    display: inline-block;
+    padding: 0.1rem 0.45rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    border-radius: 0.375rem;
+}
+
+.plugiit-rules-tag-added {
+    background: #198754;
+}
+
+.plugiit-rules-tag-modified {
+    color: #212529;
+    background: #ffc107;
+}
+
+.plugiit-rules-tag-removed {
+    background: #dc3545;
+}
+
+.plugiit-rules-modal-section h3 {
+    margin: 1rem 0 0.4rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.plugiit-rules-modal-section .plugiit-rules-content h1,
+.plugiit-rules-modal-section .plugiit-rules-content h2,
+.plugiit-rules-modal-section .plugiit-rules-content h3 {
+    font-size: 1rem;
+}
+
+.plugiit-rules-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+    padding: 1rem 1.5rem;
+    background: var(--bs-tertiary-bg, #f8f9fa);
+    border-top: 1px solid var(--bs-border-color, #dee2e6);
+}
+
+.plugiit-rules-check {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    margin: 0;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.plugiit-rules-check input {
+    width: 1.15rem;
+    height: 1.15rem;
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+}
+
+.plugiit-rules-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: center;
+    margin-left: auto;
+}
+
+.plugiit-rules-link {
+    color: var(--bs-secondary-color, #6c757d);
+    font-size: 0.875rem;
+    text-decoration: underline;
+}
+
+.plugiit-rules-btn {
+    display: inline-flex;
+    gap: 0.4rem;
+    align-items: center;
+    padding: 0.5rem 1.1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    cursor: pointer;
+}
+
+.plugiit-rules-btn-primary {
+    color: #fff;
+    background: var(--bs-primary, #0d6efd);
+    border-color: var(--bs-primary, #0d6efd);
+}
+
+.plugiit-rules-btn-primary:hover {
+    color: #fff;
+    filter: brightness(0.92);
+}
+
+.plugiit-rules-btn[disabled] {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.plugiit-rules-hidden {
+    display: none;
+}
+
+/* ---------- Non-blocking banner ---------- */
+.plugiit-rules-banner {
+    position: relative;
+    z-index: 1020;
+    color: #212529;
+    background: #ffe69c;
+    border-bottom: 1px solid #ffc107;
+    font-family: var(--bs-body-font-family, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+    font-size: 0.95rem;
+}
+
+.plugiit-rules-banner-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0.6rem 1rem;
+}
+
+.plugiit-rules-banner-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.plugiit-rules-banner .plugiit-rules-btn {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+}
+
+.plugiit-rules-banner-close {
+    padding: 0 0.4rem;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.plugiit-rules-banner.plugiit-rules-hidden {
+    display: none;
+}
+
+@media (max-width: 575.98px) {
+    .plugiit-rules-overlay {
+        padding: 0;
+    }
+
+    .plugiit-rules-dialog {
+        max-height: 100vh;
+        max-height: 100dvh;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .plugiit-rules-header,
+    .plugiit-rules-body,
+    .plugiit-rules-footer {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .plugiit-rules-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
