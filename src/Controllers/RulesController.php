@@ -1,10 +1,10 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Controllers;
+namespace Azuriom\Plugin\Rules\Controllers;
 
 use Azuriom\Http\Controllers\Controller;
-use Azuriom\Plugin\PlugiitRules\Models\Version;
-use Azuriom\Plugin\PlugiitRules\Support\RulesManager;
+use Azuriom\Plugin\Rules\Models\Version;
+use Azuriom\Plugin\Rules\Support\RulesManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -44,8 +44,8 @@ class RulesController extends Controller
         $current = $this->rules->currentVersion();
 
         if ($current === null || $current->id !== (int) $validated['version']) {
-            return to_route('plugiit-rules.index')
-                ->with('error', trans('plugiit-rules::messages.accept.outdated'));
+            return to_route('rules.index')
+                ->with('error', trans('rules::messages.accept.outdated'));
         }
 
         $this->rules->accept($request->user(), $current, $validated['source'] ?? 'page', $request->ip());
@@ -53,8 +53,8 @@ class RulesController extends Controller
         $redirect = $validated['redirect'] ?? null;
         $isLocal = $redirect !== null && ($redirect === url('/') || Str::startsWith($redirect, url('/').'/'));
 
-        return redirect($isLocal ? $redirect : route('plugiit-rules.index'))
-            ->with('success', trans('plugiit-rules::messages.accept.success', ['version' => $current->version]));
+        return redirect($isLocal ? $redirect : route('rules.index'))
+            ->with('success', trans('rules::messages.accept.success', ['version' => $current->version]));
     }
 
     protected function showVersion(Request $request, ?Version $version, bool $isCurrent)
@@ -67,7 +67,7 @@ class RulesController extends Controller
             $v->id => $v->diffWith($versions->get($i + 1)),
         ]);
 
-        return view('plugiit-rules::index', [
+        return view('rules::index', [
             'version' => $version,
             'isCurrent' => $isCurrent,
             'versions' => $versions,

@@ -1,6 +1,6 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Providers;
+namespace Azuriom\Plugin\Rules\Providers;
 
 use Azuriom\Extensions\Plugin\BaseRouteServiceProvider;
 use Illuminate\Support\Facades\Route;

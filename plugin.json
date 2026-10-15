@@ -1,5 +1,5 @@
 {
-    "id": "plugiit-rules",
+    "id": "rules",
     "name": "Plugiit Rules",
     "description": "Règlement versionné : sections éditables, publication de versions avec résumé des changements, acceptation obligatoire (fenêtre bloquante ou bandeau), blocage d'actions, case à l'inscription et suivi des acceptations.",
     "version": "1.0.0",
@@ -9,7 +9,7 @@
     ],
     "azuriom_api": "1.1.0",
     "providers": [
-        "\\Azuriom\\Plugin\\PlugiitRules\\Providers\\PlugiitRulesServiceProvider",
-        "\\Azuriom\\Plugin\\PlugiitRules\\Providers\\RouteServiceProvider"
+        "\\Azuriom\\Plugin\\Rules\\Providers\\RulesServiceProvider",
+        "\\Azuriom\\Plugin\\Rules\\Providers\\RouteServiceProvider"
     ]
 }

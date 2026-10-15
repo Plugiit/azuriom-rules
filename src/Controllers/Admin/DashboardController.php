@@ -1,13 +1,13 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Controllers\Admin;
+namespace Azuriom\Plugin\Rules\Controllers\Admin;
 
 use Azuriom\Http\Controllers\Controller;
 use Azuriom\Models\User;
-use Azuriom\Plugin\PlugiitRules\Models\Acceptance;
-use Azuriom\Plugin\PlugiitRules\Models\Version;
-use Azuriom\Plugin\PlugiitRules\Support\RulesManager;
-use Azuriom\Plugin\PlugiitRules\Support\RulesSettings;
+use Azuriom\Plugin\Rules\Models\Acceptance;
+use Azuriom\Plugin\Rules\Models\Version;
+use Azuriom\Plugin\Rules\Support\RulesManager;
+use Azuriom\Plugin\Rules\Support\RulesSettings;
 
 class DashboardController extends Controller
 {
@@ -26,7 +26,7 @@ class DashboardController extends Controller
 
         $draftDiff = Version::diffSections($current?->sectionsCollection() ?? collect(), collect($rules->draftSnapshot()));
 
-        return view('plugiit-rules::admin.dashboard', [
+        return view('rules::admin.dashboard', [
             'current' => $current,
             'required' => $required,
             'totalUsers' => $totalUsers,

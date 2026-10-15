@@ -1,6 +1,6 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Models;
+namespace Azuriom\Plugin\Rules\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Section extends Model
 {
-    protected $table = 'plugiit_rules_sections';
+    protected $table = 'rules_sections';
 
     protected $fillable = [
         'title', 'content', 'position',

@@ -1,11 +1,11 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Controllers\Admin;
+namespace Azuriom\Plugin\Rules\Controllers\Admin;
 
 use Azuriom\Http\Controllers\Controller;
 use Azuriom\Models\User;
-use Azuriom\Plugin\PlugiitRules\Models\Acceptance;
-use Azuriom\Plugin\PlugiitRules\Support\RulesManager;
+use Azuriom\Plugin\Rules\Models\Acceptance;
+use Azuriom\Plugin\Rules\Support\RulesManager;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -31,7 +31,7 @@ class UserController extends Controller
             $user = $users->count() === 1 ? $users->first() : null;
         }
 
-        return view('plugiit-rules::admin.users.index', [
+        return view('rules::admin.users.index', [
             'search' => $search,
             'users' => $users,
             'user' => $user,

@@ -1,6 +1,6 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Models;
+namespace Azuriom\Plugin\Rules\Models;
 
 use Azuriom\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -14,13 +14,13 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Azuriom\Models\User $user
- * @property \Azuriom\Plugin\PlugiitRules\Models\Version $version
+ * @property \Azuriom\Plugin\Rules\Models\Version $version
  */
 class Acceptance extends Model
 {
     public const SOURCES = ['modal', 'page', 'register', 'import'];
 
-    protected $table = 'plugiit_rules_acceptances';
+    protected $table = 'rules_acceptances';
 
     protected $fillable = [
         'user_id', 'version_id', 'ip_hash', 'source',

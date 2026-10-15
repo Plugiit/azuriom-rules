@@ -1,6 +1,6 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Support;
+namespace Azuriom\Plugin\Rules\Support;
 
 class RulesSettings
 {
@@ -10,14 +10,14 @@ class RulesSettings
      */
     public static function mode(): string
     {
-        $mode = setting('plugiit-rules.mode', 'modal');
+        $mode = setting('rules.mode', 'modal');
 
         return in_array($mode, RulesManager::MODES, true) ? $mode : 'modal';
     }
 
     public static function blockActions(): bool
     {
-        return (bool) setting('plugiit-rules.block', false);
+        return (bool) setting('rules.block', false);
     }
 
     /**
@@ -25,7 +25,7 @@ class RulesSettings
      */
     public static function blockedGroups(): array
     {
-        return array_values(array_intersect(self::json('plugiit-rules.block_groups'), array_keys(RulesManager::ACTION_GROUPS)));
+        return array_values(array_intersect(self::json('rules.block_groups'), array_keys(RulesManager::ACTION_GROUPS)));
     }
 
     /**
@@ -33,7 +33,7 @@ class RulesSettings
      */
     public static function customPatterns(): array
     {
-        return array_values(array_filter(self::json('plugiit-rules.block_routes')));
+        return array_values(array_filter(self::json('rules.block_routes')));
     }
 
     /**
@@ -55,7 +55,7 @@ class RulesSettings
 
     public static function requireOnRegister(): bool
     {
-        return (bool) setting('plugiit-rules.register', false);
+        return (bool) setting('rules.register', false);
     }
 
     protected static function json(string $key): array

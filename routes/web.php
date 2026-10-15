@@ -1,6 +1,6 @@
 <?php
 
-use Azuriom\Plugin\PlugiitRules\Controllers\RulesController;
+use Azuriom\Plugin\Rules\Controllers\RulesController;
 use Illuminate\Support\Facades\Route;
 
 /*

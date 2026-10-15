@@ -1,12 +1,12 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Controllers\Admin;
+namespace Azuriom\Plugin\Rules\Controllers\Admin;
 
 use Azuriom\Http\Controllers\Controller;
 use Azuriom\Models\ActionLog;
 use Azuriom\Models\Setting;
-use Azuriom\Plugin\PlugiitRules\Support\RulesManager;
-use Azuriom\Plugin\PlugiitRules\Support\RulesSettings;
+use Azuriom\Plugin\Rules\Support\RulesManager;
+use Azuriom\Plugin\Rules\Support\RulesSettings;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -14,7 +14,7 @@ class SettingController extends Controller
 {
     public function show()
     {
-        return view('plugiit-rules::admin.settings', [
+        return view('rules::admin.settings', [
             'mode' => RulesSettings::mode(),
             'block' => RulesSettings::blockActions(),
             'groups' => RulesSettings::blockedGroups(),
@@ -40,16 +40,16 @@ class SettingController extends Controller
             ->all();
 
         Setting::updateSettings([
-            'plugiit-rules.mode' => $validated['mode'],
-            'plugiit-rules.block' => $request->boolean('block'),
-            'plugiit-rules.block_groups' => json_encode($validated['groups'] ?? []),
-            'plugiit-rules.block_routes' => json_encode($routes),
-            'plugiit-rules.register' => $request->boolean('register'),
+            'rules.mode' => $validated['mode'],
+            'rules.block' => $request->boolean('block'),
+            'rules.block_groups' => json_encode($validated['groups'] ?? []),
+            'rules.block_routes' => json_encode($routes),
+            'rules.register' => $request->boolean('register'),
         ]);
 
-        ActionLog::log('plugiit-rules.settings.updated');
+        ActionLog::log('rules.settings.updated');
 
-        return to_route('plugiit-rules.admin.settings')
+        return to_route('rules.admin.settings')
             ->with('success', trans('messages.status.success'));
     }
 }

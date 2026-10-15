@@ -1,6 +1,6 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Models;
+namespace Azuriom\Plugin\Rules\Models;
 
 use Azuriom\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +22,7 @@ use Illuminate\Support\Collection;
  */
 class Version extends Model
 {
-    protected $table = 'plugiit_rules_versions';
+    protected $table = 'rules_versions';
 
     protected $fillable = [
         'version', 'summary', 'requires_acceptance', 'sections', 'author_id', 'published_at',

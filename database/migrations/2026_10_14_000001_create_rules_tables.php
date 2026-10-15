@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plugiit_rules_sections', function (Blueprint $table) {
+        Schema::create('rules_sections', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
             $table->longText('content');
@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('plugiit_rules_versions', function (Blueprint $table) {
+        Schema::create('rules_versions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('version', 20);
             $table->text('summary')->nullable();
@@ -32,7 +32,7 @@ return new class extends Migration
             $table->foreign('author_id')->references('id')->on('users')->nullOnDelete();
         });
 
-        Schema::create('plugiit_rules_acceptances', function (Blueprint $table) {
+        Schema::create('rules_acceptances', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('version_id');
@@ -43,7 +43,7 @@ return new class extends Migration
             $table->unique(['user_id', 'version_id']);
             $table->index('version_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
-            $table->foreign('version_id')->references('id')->on('plugiit_rules_versions')->cascadeOnDelete();
+            $table->foreign('version_id')->references('id')->on('rules_versions')->cascadeOnDelete();
         });
     }
 
@@ -52,8 +52,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plugiit_rules_acceptances');
-        Schema::dropIfExists('plugiit_rules_versions');
-        Schema::dropIfExists('plugiit_rules_sections');
+        Schema::dropIfExists('rules_acceptances');
+        Schema::dropIfExists('rules_versions');
+        Schema::dropIfExists('rules_sections');
     }
 };

@@ -1,12 +1,12 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Controllers\Admin;
+namespace Azuriom\Plugin\Rules\Controllers\Admin;
 
 use Azuriom\Http\Controllers\Controller;
 use Azuriom\Models\ActionLog;
-use Azuriom\Plugin\PlugiitRules\Models\Section;
-use Azuriom\Plugin\PlugiitRules\Models\Version;
-use Azuriom\Plugin\PlugiitRules\Support\RulesManager;
+use Azuriom\Plugin\Rules\Models\Section;
+use Azuriom\Plugin\Rules\Models\Version;
+use Azuriom\Plugin\Rules\Support\RulesManager;
 use Illuminate\Http\Request;
 
 class VersionController extends Controller
@@ -17,7 +17,7 @@ class VersionController extends Controller
     {
         $versions = Version::with('author')->withCount('acceptances')->latest('id')->get();
 
-        return view('plugiit-rules::admin.versions.index', [
+        return view('rules::admin.versions.index', [
             'versions' => $versions,
             'diffs' => $versions->mapWithKeys(fn (Version $v, int $i) => [$v->id => $v->diffWith($versions->get($i + 1))]),
         ]);
@@ -30,7 +30,7 @@ class VersionController extends Controller
     {
         $current = $this->rules->currentVersion();
 
-        return view('plugiit-rules::admin.versions.create', [
+        return view('rules::admin.versions.create', [
             'current' => $current,
             'suggested' => $this->rules->suggestNextNumber(),
             'sectionsCount' => Section::count(),
@@ -41,16 +41,16 @@ class VersionController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'version' => ['required', 'string', 'max:20', 'unique:plugiit_rules_versions,version'],
+            'version' => ['required', 'string', 'max:20', 'unique:rules_versions,version'],
             'summary' => ['nullable', 'string', 'max:2000'],
         ], [], [
-            'version' => trans('plugiit-rules::admin.versions.fields.version'),
-            'summary' => trans('plugiit-rules::admin.versions.fields.summary'),
+            'version' => trans('rules::admin.versions.fields.version'),
+            'summary' => trans('rules::admin.versions.fields.summary'),
         ]);
 
         if (Section::count() === 0) {
-            return to_route('plugiit-rules.admin.sections.index')
-                ->with('error', trans('plugiit-rules::admin.versions.no_sections'));
+            return to_route('rules.admin.sections.index')
+                ->with('error', trans('rules::admin.versions.no_sections'));
         }
 
         $version = $this->rules->publish(
@@ -60,17 +60,17 @@ class VersionController extends Controller
             $request->user(),
         );
 
-        ActionLog::log('plugiit-rules.versions.published', $version, ['version' => $version->version]);
+        ActionLog::log('rules.versions.published', $version, ['version' => $version->version]);
 
-        return to_route('plugiit-rules.admin.versions.show', $version)
-            ->with('success', trans('plugiit-rules::admin.versions.published', ['version' => $version->version]));
+        return to_route('rules.admin.versions.show', $version)
+            ->with('success', trans('rules::admin.versions.published', ['version' => $version->version]));
     }
 
     public function show(Version $version)
     {
         $acceptances = $version->acceptances()->with('user')->latest()->paginate(25);
 
-        return view('plugiit-rules::admin.versions.show', [
+        return view('rules::admin.versions.show', [
             'version' => $version->load('author'),
             'diff' => $version->diffWith($version->previous()),
             'acceptances' => $acceptances,

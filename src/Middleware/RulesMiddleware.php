@@ -1,9 +1,9 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Middleware;
+namespace Azuriom\Plugin\Rules\Middleware;
 
-use Azuriom\Plugin\PlugiitRules\Support\RulesManager;
-use Azuriom\Plugin\PlugiitRules\Support\RulesSettings;
+use Azuriom\Plugin\Rules\Support\RulesManager;
+use Azuriom\Plugin\Rules\Support\RulesSettings;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -54,10 +54,10 @@ class RulesMiddleware
             && $this->isRegisterUrl($request)
             && RulesSettings::requireOnRegister()
             && $this->rules->currentVersion() !== null
-            && ! $request->boolean('plugiit_rules_accept')) {
+            && ! $request->boolean('rules_accept')) {
             return back()
                 ->withInput($request->except('password', 'password_confirmation'))
-                ->withErrors(['plugiit_rules_accept' => trans('plugiit-rules::messages.register.required')]);
+                ->withErrors(['rules_accept' => trans('rules::messages.register.required')]);
         }
 
         return null;
@@ -67,7 +67,7 @@ class RulesMiddleware
     {
         $user = $request->user();
 
-        if ($user === null || $request->isMethodSafe() || $request->routeIs('plugiit-rules.*', 'logout')) {
+        if ($user === null || $request->isMethodSafe() || $request->routeIs('rules.*', 'logout')) {
             return null;
         }
 
@@ -77,7 +77,7 @@ class RulesMiddleware
             return null;
         }
 
-        $message = trans('plugiit-rules::messages.blocked', ['url' => route('plugiit-rules.index')]);
+        $message = trans('rules::messages.blocked', ['url' => route('rules.index')]);
 
         if ($request->expectsJson()) {
             return response()->json(['message' => strip_tags($message)], 403);
@@ -101,7 +101,7 @@ class RulesMiddleware
         $user = $request->user();
         $mode = RulesSettings::mode();
 
-        if ($user === null || $mode === 'none' || $request->routeIs('plugiit-rules.*')
+        if ($user === null || $mode === 'none' || $request->routeIs('rules.*')
             || $this->rules->hasAccepted($user)) {
             return $response;
         }
@@ -121,16 +121,16 @@ class RulesMiddleware
         }
 
         if ($mode === 'banner') {
-            $html = view('plugiit-rules::inject.banner', $data)->render();
+            $html = view('rules::inject.banner', $data)->render();
             $content = preg_replace('/<body\b[^>]*>/i', '$0'.$this->escapeReplacement($html), $content, 1, $count);
 
             if ($count === 0) {
                 return $response;
             }
 
-            $html = view('plugiit-rules::inject.assets')->render();
+            $html = view('rules::inject.assets')->render();
         } else {
-            $html = view('plugiit-rules::inject.modal', $data)->render();
+            $html = view('rules::inject.modal', $data)->render();
         }
 
         return $response->setContent($this->insertBeforeBodyEnd($content, $html));
@@ -149,7 +149,7 @@ class RulesMiddleware
         }
 
         [$formHtml, $offset] = $form[0];
-        $checkbox = view('plugiit-rules::inject.register')->render();
+        $checkbox = view('rules::inject.register')->render();
 
         // Before the submit button (and its wrapper, if any), or else before </form>.
         if (preg_match_all('/(?:<div\b[^>]*>\s*)?<button\b[^>]*type="submit"/i', $formHtml, $buttons, PREG_OFFSET_CAPTURE)) {

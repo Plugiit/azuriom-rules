@@ -1,10 +1,10 @@
 {
-    "name": "azuriom/plugiit-rules",
+    "name": "azuriom/rules",
     "type": "azuriom-plugin",
     "description": "R\u00e8glement versionn\u00e9 avec acceptation obligatoire des joueurs",
     "autoload": {
         "psr-4": {
-            "Azuriom\\Plugin\\PlugiitRules\\": "src/"
+            "Azuriom\\Plugin\\Rules\\": "src/"
         }
     },
     "replace": {

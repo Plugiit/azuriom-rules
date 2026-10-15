@@ -1,11 +1,11 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Support;
+namespace Azuriom\Plugin\Rules\Support;
 
 use Azuriom\Models\User;
-use Azuriom\Plugin\PlugiitRules\Models\Acceptance;
-use Azuriom\Plugin\PlugiitRules\Models\Section;
-use Azuriom\Plugin\PlugiitRules\Models\Version;
+use Azuriom\Plugin\Rules\Models\Acceptance;
+use Azuriom\Plugin\Rules\Models\Section;
+use Azuriom\Plugin\Rules\Models\Version;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -26,7 +26,7 @@ class RulesManager
         'vote' => ['vote.*'],
     ];
 
-    protected const CACHE_KEY = 'plugiit-rules.versions';
+    protected const CACHE_KEY = 'rules.versions';
 
     /**
      * Versions are cached in memory for the current request too.
@@ -175,6 +175,6 @@ class RulesManager
 
     protected function userCacheKey(User $user, Version $required): string
     {
-        return "plugiit-rules.accepted.{$user->id}.{$required->id}";
+        return "rules.accepted.{$user->id}.{$required->id}";
     }
 }

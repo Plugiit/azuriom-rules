@@ -1,11 +1,11 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\View\Composers;
+namespace Azuriom\Plugin\Rules\View\Composers;
 
 use Azuriom\Extensions\Plugin\AdminUserEditComposer;
 use Azuriom\Models\User;
-use Azuriom\Plugin\PlugiitRules\Models\Acceptance;
-use Azuriom\Plugin\PlugiitRules\Support\RulesManager;
+use Azuriom\Plugin\Rules\Models\Acceptance;
+use Azuriom\Plugin\Rules\Support\RulesManager;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
@@ -15,7 +15,7 @@ class AdminUserAcceptancesComposer extends AdminUserEditComposer
 
     public function getCards(User $user, View $view)
     {
-        if (! Gate::allows('plugiit-rules.admin') || $this->rules->currentVersion() === null) {
+        if (! Gate::allows('rules.admin') || $this->rules->currentVersion() === null) {
             return [];
         }
 
@@ -24,9 +24,9 @@ class AdminUserAcceptancesComposer extends AdminUserEditComposer
         $view->with('plugiitRulesRequired', $this->rules->requiredVersion());
 
         return [
-            'plugiit-rules' => [
-                'name' => trans('plugiit-rules::admin.users.card'),
-                'view' => 'plugiit-rules::admin.users.card',
+            'rules' => [
+                'name' => trans('rules::admin.users.card'),
+                'view' => 'rules::admin.users.card',
             ],
         ];
     }

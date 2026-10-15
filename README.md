@@ -11,7 +11,7 @@ Azuriom plugin · v1.0.0 · by Plugiit
 - **Rules editing**: the rules are made of ordered sections (drag and drop) edited with the Azuriom rich text editor. Sections form a **draft** that players do not see until it is published.
 - **Version publishing**: version number (suggested automatically), summary of the changes, and a "require a new acceptance" option (otherwise the version is a minor fix and players are not asked again). Each version is an immutable snapshot.
 - **Automatic change summaries** between versions: added, modified and removed sections. The admin panel also shows the unpublished changes of the draft.
-- **Public rules page** at `/plugiit-rules`: current version, table of contents with anchors, the player's acceptance status, and version history with summaries and changes. Older versions are available at `/plugiit-rules/versions/{id}`.
+- **Public rules page** at `/rules`: current version, table of contents with anchors, the player's acceptance status, and version history with summaries and changes. Older versions are available at `/rules/versions/{id}`.
 - **Mandatory acceptance** for logged-in players who have not accepted the latest version that requires it:
   - **blocking popup**: the website cannot be used until the player accepts (they can still log out);
   - **non-blocking banner** at the top of the pages (can be hidden for the browsing session);
@@ -36,10 +36,10 @@ Azuriom plugin · v1.0.0 · by Plugiit
 1. Copy the plugin into the `plugins/` directory of your Azuriom installation. The folder **must be named after the plugin ID**, not after the repository:
 
    ```
-   plugins/plugiit-rules/
+   plugins/rules/
    ```
 
-2. Enable the plugin from **Admin → Plugins**. The migrations (tables `plugiit_rules_sections`, `plugiit_rules_versions`, `plugiit_rules_acceptances`) run automatically.
+2. Enable the plugin from **Admin → Plugins**. The migrations (tables `rules_sections`, `rules_versions`, `rules_acceptances`) run automatically.
 
 Then:
 
@@ -53,17 +53,17 @@ Then:
 
 | Permission | Description |
 | --- | --- |
-| `plugiit-rules.admin` | Manage the rules, their versions and view acceptances (requires admin panel access) |
+| `rules.admin` | Manage the rules, their versions and view acceptances (requires admin panel access) |
 
 ### Admin pages
 
 | Page | URL |
 | --- | --- |
-| Overview | `/admin/plugiit-rules` |
-| Sections (draft) | `/admin/plugiit-rules/sections` |
-| Versions | `/admin/plugiit-rules/versions` |
-| Acceptances per player | `/admin/plugiit-rules/users` |
-| Settings | `/admin/plugiit-rules/settings` |
+| Overview | `/admin/rules` |
+| Sections (draft) | `/admin/rules/sections` |
+| Versions | `/admin/rules/versions` |
+| Acceptances per player | `/admin/rules/users` |
+| Settings | `/admin/rules/settings` |
 
 The overview shows the current version, the version to accept, the share of players who accepted it, the latest acceptances, whether the draft has unpublished changes, the display mode and the blocked actions.
 
@@ -83,9 +83,9 @@ The overview shows the current version, the version to accept, the share of play
 
 | URL | Description |
 | --- | --- |
-| `/plugiit-rules` | Current version of the rules. |
-| `/plugiit-rules/versions/{id}` | A specific (possibly older) version. |
-| `POST /plugiit-rules/accept` | Accept the current version (logged-in players, used by the page and the popup). |
+| `/rules` | Current version of the rules. |
+| `/rules/versions/{id}` | A specific (possibly older) version. |
+| `POST /rules/accept` | Accept the current version (logged-in players, used by the page and the popup). |
 
 ### How the injection works
 
@@ -98,7 +98,7 @@ The CSS and JS (`assets/css/style.css`, `assets/js/script.js`) only use classes 
 Shows the acceptance status of the logged-in player, with a link to the rules page:
 
 ```blade
-@include('plugiit-rules::widget')
+@include('rules::widget')
 
 {{-- or --}}
 @plugiitRulesStatus

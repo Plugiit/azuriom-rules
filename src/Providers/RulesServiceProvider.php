@@ -1,23 +1,23 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Providers;
+namespace Azuriom\Plugin\Rules\Providers;
 
 use Azuriom\Extensions\Plugin\AdminUserEditComposer;
 use Azuriom\Extensions\Plugin\BasePluginServiceProvider;
 use Azuriom\Models\ActionLog;
 use Azuriom\Models\Permission;
-use Azuriom\Plugin\PlugiitRules\Listeners\RecordRegistrationAcceptance;
-use Azuriom\Plugin\PlugiitRules\Middleware\RulesMiddleware;
-use Azuriom\Plugin\PlugiitRules\Models\Version;
-use Azuriom\Plugin\PlugiitRules\Support\RulesManager;
-use Azuriom\Plugin\PlugiitRules\View\Composers\AdminUserAcceptancesComposer;
+use Azuriom\Plugin\Rules\Listeners\RecordRegistrationAcceptance;
+use Azuriom\Plugin\Rules\Middleware\RulesMiddleware;
+use Azuriom\Plugin\Rules\Models\Version;
+use Azuriom\Plugin\Rules\Support\RulesManager;
+use Azuriom\Plugin\Rules\View\Composers\AdminUserAcceptancesComposer;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\View;
 
-class PlugiitRulesServiceProvider extends BasePluginServiceProvider
+class RulesServiceProvider extends BasePluginServiceProvider
 {
     /**
      * Register any plugin services.
@@ -48,20 +48,20 @@ class PlugiitRulesServiceProvider extends BasePluginServiceProvider
         $this->registerAdminNavigation();
 
         Permission::registerPermissions([
-            'plugiit-rules.admin' => 'plugiit-rules::admin.permission',
+            'rules.admin' => 'rules::admin.permission',
         ]);
 
         ActionLog::registerLogs([
-            'plugiit-rules.versions.published' => [
+            'rules.versions.published' => [
                 'icon' => 'journal-check',
                 'color' => 'success',
-                'message' => 'plugiit-rules::admin.logs.published',
+                'message' => 'rules::admin.logs.published',
                 'model' => Version::class,
             ],
-            'plugiit-rules.settings.updated' => [
+            'rules.settings.updated' => [
                 'icon' => 'journal-text',
                 'color' => 'info',
-                'message' => 'plugiit-rules::admin.logs.settings',
+                'message' => 'rules::admin.logs.settings',
             ],
         ]);
 
@@ -72,7 +72,7 @@ class PlugiitRulesServiceProvider extends BasePluginServiceProvider
         }
 
         // @plugiitRulesStatus : small widget for themes (acceptance status of the current user).
-        Blade::directive('plugiitRulesStatus', fn () => "<?php echo view('plugiit-rules::widget')->render(); ?>");
+        Blade::directive('plugiitRulesStatus', fn () => "<?php echo view('rules::widget')->render(); ?>");
     }
 
     /**
@@ -83,7 +83,7 @@ class PlugiitRulesServiceProvider extends BasePluginServiceProvider
     protected function routeDescriptions(): array
     {
         return [
-            'plugiit-rules.index' => trans('plugiit-rules::messages.title'),
+            'rules.index' => trans('rules::messages.title'),
         ];
     }
 
@@ -95,32 +95,32 @@ class PlugiitRulesServiceProvider extends BasePluginServiceProvider
     protected function adminNavigation(): array
     {
         return [
-            'plugiit-rules' => [
-                'name' => trans('plugiit-rules::admin.nav.title'),
+            'rules' => [
+                'name' => trans('rules::admin.nav.title'),
                 'type' => 'dropdown',
                 'icon' => 'bi bi-journal-check',
-                'route' => 'plugiit-rules.admin.*',
-                'permission' => 'plugiit-rules.admin',
+                'route' => 'rules.admin.*',
+                'permission' => 'rules.admin',
                 'items' => [
-                    'plugiit-rules.admin.index' => [
-                        'name' => trans('plugiit-rules::admin.nav.dashboard'),
-                        'permission' => 'plugiit-rules.admin',
+                    'rules.admin.index' => [
+                        'name' => trans('rules::admin.nav.dashboard'),
+                        'permission' => 'rules.admin',
                     ],
-                    'plugiit-rules.admin.sections.index' => [
-                        'name' => trans('plugiit-rules::admin.nav.sections'),
-                        'permission' => 'plugiit-rules.admin',
+                    'rules.admin.sections.index' => [
+                        'name' => trans('rules::admin.nav.sections'),
+                        'permission' => 'rules.admin',
                     ],
-                    'plugiit-rules.admin.versions.index' => [
-                        'name' => trans('plugiit-rules::admin.nav.versions'),
-                        'permission' => 'plugiit-rules.admin',
+                    'rules.admin.versions.index' => [
+                        'name' => trans('rules::admin.nav.versions'),
+                        'permission' => 'rules.admin',
                     ],
-                    'plugiit-rules.admin.users.index' => [
-                        'name' => trans('plugiit-rules::admin.nav.users'),
-                        'permission' => 'plugiit-rules.admin',
+                    'rules.admin.users.index' => [
+                        'name' => trans('rules::admin.nav.users'),
+                        'permission' => 'rules.admin',
                     ],
-                    'plugiit-rules.admin.settings' => [
-                        'name' => trans('plugiit-rules::admin.nav.settings'),
-                        'permission' => 'plugiit-rules.admin',
+                    'rules.admin.settings' => [
+                        'name' => trans('rules::admin.nav.settings'),
+                        'permission' => 'rules.admin',
                     ],
                 ],
             ],

@@ -1,6 +1,6 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Requests;
+namespace Azuriom\Plugin\Rules\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -20,8 +20,8 @@ class SectionRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'title' => trans('plugiit-rules::admin.sections.fields.title'),
-            'content' => trans('plugiit-rules::admin.sections.fields.content'),
+            'title' => trans('rules::admin.sections.fields.title'),
+            'content' => trans('rules::admin.sections.fields.content'),
         ];
     }
 }

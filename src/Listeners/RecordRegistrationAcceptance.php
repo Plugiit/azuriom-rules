@@ -1,10 +1,10 @@
 <?php
 
-namespace Azuriom\Plugin\PlugiitRules\Listeners;
+namespace Azuriom\Plugin\Rules\Listeners;
 
 use Azuriom\Models\User;
-use Azuriom\Plugin\PlugiitRules\Support\RulesManager;
-use Azuriom\Plugin\PlugiitRules\Support\RulesSettings;
+use Azuriom\Plugin\Rules\Support\RulesManager;
+use Azuriom\Plugin\Rules\Support\RulesSettings;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 
@@ -21,7 +21,7 @@ class RecordRegistrationAcceptance
         $version = $this->rules->currentVersion();
 
         if (! $event->user instanceof User || $version === null
-            || ! RulesSettings::requireOnRegister() || ! $this->request->boolean('plugiit_rules_accept')) {
+            || ! RulesSettings::requireOnRegister() || ! $this->request->boolean('rules_accept')) {
             return;
         }
 

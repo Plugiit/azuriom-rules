@@ -1,47 +1,47 @@
 @extends('layouts.app')
 
-@section('title', trans('plugiit-rules::messages.title'))
+@section('title', trans('rules::messages.title'))
 
 @push('styles')
-    <link href="{{ plugin_asset('plugiit-rules', 'css/style.css') }}" rel="stylesheet">
+    <link href="{{ plugin_asset('rules', 'css/style.css') }}" rel="stylesheet">
 @endpush
 
 @section('content')
     <div class="plugiit-rules-page">
-        <h1>{{ trans('plugiit-rules::messages.title') }}</h1>
+        <h1>{{ trans('rules::messages.title') }}</h1>
 
         @if($version === null)
-            <div class="alert alert-info"><i class="bi bi-info-circle"></i> {{ trans('plugiit-rules::messages.empty') }}</div>
+            <div class="alert alert-info"><i class="bi bi-info-circle"></i> {{ trans('rules::messages.empty') }}</div>
         @else
             @unless($isCurrent)
                 <div class="alert alert-warning d-flex flex-wrap justify-content-between align-items-center gap-2">
-                    <span><i class="bi bi-clock-history"></i> {{ trans('plugiit-rules::messages.old_version', ['version' => $version->version]) }}</span>
-                    <a href="{{ route('plugiit-rules.index') }}" class="btn btn-sm btn-warning">{{ trans('plugiit-rules::messages.see_current') }}</a>
+                    <span><i class="bi bi-clock-history"></i> {{ trans('rules::messages.old_version', ['version' => $version->version]) }}</span>
+                    <a href="{{ route('rules.index') }}" class="btn btn-sm btn-warning">{{ trans('rules::messages.see_current') }}</a>
                 </div>
             @endunless
 
             @if($mustAccept)
                 <div class="card border-primary mb-4" id="accept">
                     <div class="card-body">
-                        <h2 class="h5"><i class="bi bi-journal-check"></i> {{ trans('plugiit-rules::messages.status.must_accept') }}</h2>
+                        <h2 class="h5"><i class="bi bi-journal-check"></i> {{ trans('rules::messages.status.must_accept') }}</h2>
                         @if($version->summary)
-                            <p class="mb-2"><strong>{{ trans('plugiit-rules::messages.changes') }} :</strong> {{ $version->summary }}</p>
+                            <p class="mb-2"><strong>{{ trans('rules::messages.changes') }} :</strong> {{ $version->summary }}</p>
                         @endif
-                        <form action="{{ route('plugiit-rules.accept') }}" method="POST" class="d-flex flex-wrap align-items-center gap-3">
+                        <form action="{{ route('rules.accept') }}" method="POST" class="d-flex flex-wrap align-items-center gap-3">
                             @csrf
                             <input type="hidden" name="version" value="{{ $version->id }}">
                             <input type="hidden" name="source" value="page">
                             <div class="form-check mb-0">
                                 <input class="form-check-input" type="checkbox" id="plugiitRulesPageCheck" required>
-                                <label class="form-check-label" for="plugiitRulesPageCheck">{{ trans('plugiit-rules::messages.accept.checkbox', ['version' => $version->version]) }}</label>
+                                <label class="form-check-label" for="plugiitRulesPageCheck">{{ trans('rules::messages.accept.checkbox', ['version' => $version->version]) }}</label>
                             </div>
-                            <button type="submit" class="btn btn-primary"><i class="bi bi-check2-circle"></i> {{ trans('plugiit-rules::messages.accept.button') }}</button>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-check2-circle"></i> {{ trans('rules::messages.accept.button') }}</button>
                         </form>
                     </div>
                 </div>
             @elseif($isCurrent && $lastAcceptance)
                 <div class="alert alert-success"><i class="bi bi-check-circle"></i>
-                    {{ trans('plugiit-rules::messages.status.accepted', ['version' => $lastAcceptance->version?->version, 'date' => format_date($lastAcceptance->created_at)]) }}
+                    {{ trans('rules::messages.status.accepted', ['version' => $lastAcceptance->version?->version, 'date' => format_date($lastAcceptance->created_at)]) }}
                 </div>
             @endif
 
@@ -49,14 +49,14 @@
                 <div class="col-lg-3">
                     <div class="plugiit-rules-toc card">
                         <div class="card-header">
-                            <i class="bi bi-list-ul"></i> {{ trans('plugiit-rules::messages.summary') }}
+                            <i class="bi bi-list-ul"></i> {{ trans('rules::messages.summary') }}
                         </div>
                         <nav class="list-group list-group-flush">
                             @foreach($version->sections as $section)
                                 <a class="list-group-item list-group-item-action" href="#{{ $section['anchor'] }}">{{ $section['title'] }}</a>
                             @endforeach
                             @if($versions->count() > 1)
-                                <a class="list-group-item list-group-item-action text-body-secondary" href="#plugiit-rules-history"><i class="bi bi-clock-history"></i> {{ trans('plugiit-rules::messages.history') }}</a>
+                                <a class="list-group-item list-group-item-action text-body-secondary" href="#plugiit-rules-history"><i class="bi bi-clock-history"></i> {{ trans('rules::messages.history') }}</a>
                             @endif
                         </nav>
                     </div>
@@ -66,8 +66,8 @@
                     <div class="card mb-4">
                         <div class="card-body">
                             <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
-                                <span class="badge text-bg-primary fs-6">{{ trans('plugiit-rules::messages.version', ['version' => $version->version]) }}</span>
-                                <span class="text-body-secondary small">{{ trans('plugiit-rules::messages.published_on', ['date' => format_date($version->published_at)]) }}</span>
+                                <span class="badge text-bg-primary fs-6">{{ trans('rules::messages.version', ['version' => $version->version]) }}</span>
+                                <span class="text-body-secondary small">{{ trans('rules::messages.published_on', ['date' => format_date($version->published_at)]) }}</span>
                             </div>
 
                             @foreach($version->sections as $section)
@@ -83,31 +83,31 @@
 
                     @if($versions->count() > 1)
                         <div class="card" id="plugiit-rules-history">
-                            <div class="card-header"><i class="bi bi-clock-history"></i> {{ trans('plugiit-rules::messages.history') }}</div>
+                            <div class="card-header"><i class="bi bi-clock-history"></i> {{ trans('rules::messages.history') }}</div>
                             <ul class="list-group list-group-flush">
                                 @foreach($versions as $item)
                                     <li class="list-group-item">
                                         <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
                                             <div>
-                                                <strong>{{ trans('plugiit-rules::messages.version', ['version' => $item->version]) }}</strong>
+                                                <strong>{{ trans('rules::messages.version', ['version' => $item->version]) }}</strong>
                                                 <span class="text-body-secondary small">— {{ format_date($item->published_at) }}</span>
                                                 @if($loop->first)
-                                                    <span class="badge text-bg-success">{{ trans('plugiit-rules::messages.current') }}</span>
+                                                    <span class="badge text-bg-success">{{ trans('rules::messages.current') }}</span>
                                                 @endif
                                                 @if($item->requires_acceptance && ! $loop->last)
-                                                    <span class="badge text-bg-secondary">{{ trans('plugiit-rules::messages.requires_acceptance') }}</span>
+                                                    <span class="badge text-bg-secondary">{{ trans('rules::messages.requires_acceptance') }}</span>
                                                 @endif
                                             </div>
                                             @unless($item->is($version))
-                                                <a href="{{ $loop->first ? route('plugiit-rules.index') : route('plugiit-rules.versions.show', $item) }}" class="btn btn-sm btn-outline-primary">{{ trans('plugiit-rules::messages.see') }}</a>
+                                                <a href="{{ $loop->first ? route('rules.index') : route('rules.versions.show', $item) }}" class="btn btn-sm btn-outline-primary">{{ trans('rules::messages.see') }}</a>
                                             @endunless
                                         </div>
                                         @if($item->summary)
                                             <p class="mb-1 mt-1">{{ $item->summary }}</p>
                                         @endif
-                                        @include('plugiit-rules::_diff', [
+                                        @include('rules::_diff', [
                                             'diff' => $diffs[$item->id],
-                                            'emptyText' => $loop->last ? trans('plugiit-rules::messages.first_version') : null,
+                                            'emptyText' => $loop->last ? trans('rules::messages.first_version') : null,
                                         ])
                                     </li>
                                 @endforeach

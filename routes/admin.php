@@ -1,10 +1,10 @@
 <?php
 
-use Azuriom\Plugin\PlugiitRules\Controllers\Admin\DashboardController;
-use Azuriom\Plugin\PlugiitRules\Controllers\Admin\SectionController;
-use Azuriom\Plugin\PlugiitRules\Controllers\Admin\SettingController;
-use Azuriom\Plugin\PlugiitRules\Controllers\Admin\UserController;
-use Azuriom\Plugin\PlugiitRules\Controllers\Admin\VersionController;
+use Azuriom\Plugin\Rules\Controllers\Admin\DashboardController;
+use Azuriom\Plugin\Rules\Controllers\Admin\SectionController;
+use Azuriom\Plugin\Rules\Controllers\Admin\SettingController;
+use Azuriom\Plugin\Rules\Controllers\Admin\UserController;
+use Azuriom\Plugin\Rules\Controllers\Admin\VersionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('can:plugiit-rules.admin')->group(function () {
+Route::middleware('can:rules.admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     Route::post('sections/update-order', [SectionController::class, 'updateOrder'])->name('sections.update-order');
