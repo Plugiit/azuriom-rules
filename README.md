@@ -4,7 +4,7 @@
 
 Versioned server rules for Azuriom, with mandatory acceptance by players and full acceptance tracking.
 
-Azuriom plugin · v1.0.0 · by Plugiit
+Azuriom plugin · v1.0.1 · by Plugiit
 
 ## Features
 

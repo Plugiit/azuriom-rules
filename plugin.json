@@ -2,7 +2,7 @@
     "id": "rules",
     "name": "Plugiit Rules",
     "description": "Règlement versionné : sections éditables, publication de versions avec résumé des changements, acceptation obligatoire (fenêtre bloquante ou bandeau), blocage d'actions, case à l'inscription et suivi des acceptations.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "url": "https://plugiit.dev",
     "authors": [
         "Plugiit"
